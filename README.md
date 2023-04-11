@@ -10,6 +10,7 @@ This is a front-end project that I created in my free time just to show the func
 
 ## Know Bugs
 - New Product Button do not work (Not actually a bug, but whatever)
+- Page is not Responsive. So it is recommended to use a notebook or a PC. Poor performance in android or IOS (already tested).
 
 ## Next Implementations
 - Edit Product;
