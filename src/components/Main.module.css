@@ -1,0 +1,106 @@
+.button {
+	display: inline-flex;
+	font-size: medium;
+	align-items: center;
+	background-color: #a990fb;
+	color: #2a2630;
+	border: 0px transparent solid;
+	border-radius: 4px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+	cursor: pointer;
+	font-weight: bold;
+	text-decoration: none;
+	font-family: Helvetica, Arial, sans-serif;
+	padding: 1em;
+	line-height: 24px;
+}
+
+h1 {
+	color: white;
+}
+
+.textDecorated {
+	color: white;
+	line-height: 24px;
+	font-size: medium;
+	font-weight: bold;
+}
+
+.mainDiv {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.smallDiv {
+	display: flex;
+	align-items: center;
+	gap: 2rem;
+}
+
+.button:hover {
+	background-color: #8c6cf7;
+}
+
+.itemContainer {
+	display: flex;
+	font-size: medium;
+	align-items: center;
+	justify-content: center;
+	background-color: #a990fb;
+	min-width: 65%;
+	border-radius: 2vh;
+	min-height: 25vh;
+	gap: 2rem;
+	margin: 0.5vh;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.itemContainer:hover {
+	cursor: pointer;
+	background-color: #b6a1f8;
+}
+
+.imageContainer {
+	min-width: 25%;
+	border-radius: 3vh;
+	min-height: 19vh;
+	background-color: #d4c7ff;
+	background-image: url('https://s2.glbimg.com/-skQXghwNBeLCuYy742th0fMiZQ=/e.glbimg.com/og/ed/f/original/2019/12/10/marfrig.jpg');
+	background-size: contain;
+	border: 1vh white solid;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.infoContainer {
+	display: flex;
+	flex-direction: column;
+	font-size: medium;
+
+	min-width: 65%;
+	border-radius: 2vh;
+	min-height: 19vh;
+}
+
+.infoContainer p {
+	padding: 0;
+	margin: 0;
+	color: white;
+	font-weight: bold;
+	font-variant: small-caps;
+}
+
+.titleContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	font-size: larger;
+}
+
+.infosContainer {
+	display: flex;
+	flex-direction: column;
+	margin-left: 2vh;
+	margin-bottom: 1vh;
+}
