@@ -91,6 +91,47 @@ h1 {
 	font-variant: small-caps;
 }
 
+.editContainer {
+	display: flex;
+	flex-direction: column;
+	font-size: medium;
+	min-width: 30%;
+	border-radius: 2vh;
+	min-height: 19vh;
+}
+
+.editContainer input, 
+.editContainer select {
+	border-radius: 4px;
+	line-height: large;
+	text-align: center;
+}
+
+.categories {
+	max-width: 45%;
+	border: 2px solid black;
+	font-variant: small-caps;
+}
+
+.buttonContainer {
+	display: flex;
+	flex-direction: column;
+	font-size: medium;
+	min-width: 5%;
+	border-radius: 2vh;
+	min-height: 19vh;
+	align-items: center;
+	justify-content: center;
+}
+
+.editContainer p {
+	padding: 0;
+	margin: 0;
+	color: white;
+	font-weight: bold;
+	font-variant: small-caps;
+}
+
 .titleContainer {
 	display: flex;
 	flex-direction: column;

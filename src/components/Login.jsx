@@ -35,7 +35,7 @@ export function Login(props) {
 				<input
 					type="text"
 					name="username"
-					onChange={loginHandler}
+					onInput={loginHandler}
 				/>
 
 				<label
@@ -47,7 +47,7 @@ export function Login(props) {
 				<input
 					type="password"
 					name="password"
-					onChange={passwordHandler}
+					onInput={passwordHandler}
 				/>
 				<Link
 					className={classes.button}

@@ -15,6 +15,7 @@ export function RootLayout() {
 	const [token, setToken] = useState('Bearer ');
 	const [productsList, setProductsList] = useState({});
 	const [oneProduct, setOneProduct] = useState(false);
+	const [categoryList, setCategoryList] = useState('');
 
 	function registerHandler() {
 		setIsAuth('registering');
@@ -26,6 +27,24 @@ export function RootLayout() {
 
 	const productsHandler = () => {
 		setIsAuth('auth');
+	};
+
+	const categoriesHandler = async () => {
+		const dataFetch = await fetch('https://matt-menu.onrender.com/category', {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: token,
+			},
+		});
+
+		if (!dataFetch) {
+			alert('Server Error.');
+			return navigate('/');
+		}
+
+		const categoryData = await dataFetch.json();
+		setCategoryList(categoryData.categories)
 	};
 
 	const checkProductHandler = async (productId) => {
@@ -118,6 +137,7 @@ export function RootLayout() {
 					getProductsHandler={getProductsHandler}
 					getOneProduct={checkProductHandler}
 					products={productsList}
+					categoriesHandler={categoriesHandler}
 				/>
 			)}
 
@@ -125,6 +145,8 @@ export function RootLayout() {
 				<OneItem
 					product={oneProduct}
 					allProductsHandler={allProductsHandler}
+					token={token}
+					categoryList={categoryList}
 				/>
 			)}
 		</>

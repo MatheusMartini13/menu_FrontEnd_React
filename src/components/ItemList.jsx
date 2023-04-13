@@ -1,10 +1,15 @@
 import { useEffect } from 'react';
-import { Link, Form } from 'react-router-dom';
 import classes from './Main.module.css';
 
-export function ItemList({ products, getProductsHandler, getOneProduct }) {
+export function ItemList({
+	products,
+	getProductsHandler,
+	getOneProduct,
+	categoriesHandler,
+}) {
 	useEffect(() => {
 		getProductsHandler();
+		categoriesHandler();
 	}, []);
 
 	const productArray = products.products;
