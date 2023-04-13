@@ -8,6 +8,7 @@ export function EditContent({
 	EditingModeHandler,
 	token,
 	categoryList,
+	setOneProduct,
 }) {
 	const [name, setName] = useState(product.name);
 	const [price, setPrice] = useState(product.price);
@@ -26,17 +27,30 @@ export function EditContent({
 				},
 				body: JSON.stringify({
 					name: name,
-          price: price,
-          quantity: 14,
-          categories: [category0, category1]
+					price: price,
+					quantity: 14,
+					categories: [category0, category1],
 				}),
 			},
 		);
 
+		if (!dataFetch) {
+			alert('Edit Problem!');
+			return null;
+		}
+
 		const result = await dataFetch.json();
-		const newProduct = result.product;
-		console.log(result);
-		console.log(newProduct);
+		const newProduct = result?.product;
+
+		if (!newProduct) {
+			alert('Product no found!');
+			return null;
+		}
+
+    newProduct.categories = [{ name: category0 }, {name: category1 }]
+		setOneProduct(newProduct);
+
+		EditingModeHandler();
 	};
 
 	return (

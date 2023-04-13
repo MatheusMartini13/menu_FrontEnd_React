@@ -144,6 +144,7 @@ export function RootLayout() {
 			{isAuth === 'auth' && oneProduct !== false && (
 				<OneItem
 					product={oneProduct}
+					setOneProduct = {setOneProduct}
 					allProductsHandler={allProductsHandler}
 					token={token}
 					categoryList={categoryList}

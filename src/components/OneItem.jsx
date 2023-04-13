@@ -4,7 +4,13 @@ import classes from './Main.module.css';
 import { ItemContent } from './ItemContent';
 import { EditContent } from './EditItemContent';
 
-export function OneItem({ product, allProductsHandler, token, categoryList }) {
+export function OneItem({
+	product,
+	allProductsHandler,
+	token,
+	categoryList,
+	setOneProduct,
+}) {
 	const [editingMode, setEditingMode] = useState(false);
 
 	const EditingModeHandler = () => {
@@ -28,6 +34,7 @@ export function OneItem({ product, allProductsHandler, token, categoryList }) {
 			)}
 			{editingMode && (
 				<EditContent
+					setOneProduct={setOneProduct}
 					product={product}
 					allProductsHandler={allProductsHandler}
 					EditingModeHandler={EditingModeHandler}
