@@ -3,15 +3,8 @@ import classes from './Main.module.css';
 
 export function ItemList({
 	products,
-	getProductsHandler,
 	getOneProduct,
-	categoriesHandler,
 }) {
-	useEffect(() => {
-		getProductsHandler();
-		categoriesHandler();
-	}, []);
-
 	const productArray = products.products;
 
 	return (

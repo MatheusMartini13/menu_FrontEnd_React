@@ -4,12 +4,12 @@ import { useNavigate } from 'react-router-dom';
 
 import classes from './MainHeader.module.css';
 
-function MainHeader() {
+function MainHeader({ newProductHandler, isAuth }) {
 	const navigate = useNavigate();
 
 	const mainMenuHandler = () => {
-		navigate('/')
-	}
+		navigate('/');
+	};
 
 	return (
 		<header className={classes.header}>
@@ -20,15 +20,17 @@ function MainHeader() {
 				<MdOutlineRestaurantMenu />
 				Matt - Menu
 			</h1>
-			<p>
-				<Link
-					to="/"
-					className={classes.button}
-				>
-					<MdOutlineRestaurantMenu size={18} />
-					New Product
-				</Link>
-			</p>
+			{isAuth && (
+				<p>
+					<Link
+						onClick={newProductHandler}
+						className={classes.button}
+					>
+						<MdOutlineRestaurantMenu size={18} />
+						New Product
+					</Link>
+				</p>
+			)}
 		</header>
 	);
 }

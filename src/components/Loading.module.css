@@ -1,0 +1,45 @@
+.logo {
+	font-size: 50vh;
+	pointer-events: none;
+	color: white;
+}
+
+.loadDiv {
+	z-index: 2;
+	background-image: radial-gradient(ellipse at top left, #7f50e4, #4c05d0);
+	position: fixed;
+	top: 0;
+	left: 0;
+	min-width: 100%;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	align-content: center;
+	justify-content: center;
+}
+
+.loadDiv h1 {
+	font-variant: small-caps;
+	font-size: 10vh;
+}
+
+.loadDiv p {
+	color: white;
+	font-size: 3vh;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	.logo {
+		animation: logo-spin infinite 20s linear;
+	}
+}
+
+@keyframes logo-spin {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}

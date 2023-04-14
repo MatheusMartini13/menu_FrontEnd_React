@@ -47,9 +47,9 @@ export function EditContent({
 			return null;
 		}
 
-    newProduct.categories = [{ name: category0 }, {name: category1 }]
+		newProduct.categories = [{ name: category0 }, { name: category1 }];
 		setOneProduct(newProduct);
-
+		result?.message ? alert(result.message) : console.log('No message');
 		EditingModeHandler();
 	};
 
@@ -85,7 +85,12 @@ export function EditContent({
 										})
 										.map((category) => {
 											return (
-												<option value={category.name}>{category.name}</option>
+												<option
+													key={category.name}
+													value={category.name}
+												>
+													{category.name}
+												</option>
 											);
 										})}
 								</select>{' '}
@@ -103,7 +108,12 @@ export function EditContent({
 										})
 										.map((category) => {
 											return (
-												<option value={category.name}>{category.name}</option>
+												<option
+													key={category.name}
+													value={category.name}
+												>
+													{category.name}
+												</option>
 											);
 										})}
 								</select>
@@ -135,7 +145,7 @@ export function EditContent({
 							className={classes.button}
 							onClick={saveEditProductHandler}
 						>
-							Salvar
+							Save
 						</Link>
 					</div>
 				</div>
@@ -143,7 +153,7 @@ export function EditContent({
 					className={classes.button}
 					onClick={allProductsHandler}
 				>
-					Voltar
+					Return
 				</Link>
 			</>
 		</div>

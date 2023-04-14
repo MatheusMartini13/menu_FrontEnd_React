@@ -1,7 +1,32 @@
 import { Link } from 'react-router-dom';
 import classes from './Main.module.css';
 
-export function ItemContent({ product, allProductsHandler, EditingModeHandler }) {
+export function ItemContent({
+	product,
+	allProductsHandler,
+	EditingModeHandler,
+	token,
+}) {
+	async function deleteHandler() {
+		const deleteData = await fetch(
+			'https://matt-menu.onrender.com/product' + product._id,
+			{
+				method: 'DELETE',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: token,
+				},
+			},
+		);
+		if (!deleteData) {
+			alert('Delete Problem!');
+			return null;
+		}
+		const result = await deleteData.json();
+		result?.message ? alert(result.message) : console.log('No message');
+		allProductsHandler();
+	}
+
 	return (
 		<div className={classes.mainDiv}>
 			<>
@@ -16,7 +41,7 @@ export function ItemContent({ product, allProductsHandler, EditingModeHandler })
 								Categories:{' '}
 								{product.categories.map((cat) => {
 									return (
-										<span key={cat._id + product._id}>
+										<span key={product._id + cat.name}>
 											{'| ' + cat.name + ' | '}
 										</span>
 									);
@@ -31,7 +56,13 @@ export function ItemContent({ product, allProductsHandler, EditingModeHandler })
 							className={classes.button}
 							onClick={EditingModeHandler}
 						>
-							Editar
+							Edit
+						</Link>
+						<Link
+							className={classes.button}
+							onClick={deleteHandler}
+						>
+							Delete
 						</Link>
 					</div>
 				</div>
@@ -39,7 +70,7 @@ export function ItemContent({ product, allProductsHandler, EditingModeHandler })
 					className={classes.button}
 					onClick={allProductsHandler}
 				>
-					Voltar
+					Return
 				</Link>
 			</>
 		</div>

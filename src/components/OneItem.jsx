@@ -30,6 +30,7 @@ export function OneItem({
 					product={product}
 					allProductsHandler={allProductsHandler}
 					EditingModeHandler={EditingModeHandler}
+					token={token}
 				/>
 			)}
 			{editingMode && (

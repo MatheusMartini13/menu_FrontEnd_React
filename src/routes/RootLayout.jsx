@@ -8,6 +8,8 @@ import { Login } from '../components/Login';
 import { ItemList } from '../components/ItemList';
 import { Register } from '../components/Register';
 import { OneItem } from '../components/OneItem';
+import { NewProduct } from '../components/NewProduct';
+import { Loading } from '../components/Loading';
 
 export function RootLayout() {
 	const navigate = useNavigate();
@@ -16,6 +18,17 @@ export function RootLayout() {
 	const [productsList, setProductsList] = useState({});
 	const [oneProduct, setOneProduct] = useState(false);
 	const [categoryList, setCategoryList] = useState('');
+	const [newProduct, setNewProduct] = useState('');
+	const [isFetching, setIsFetching] = useState(false);
+
+	async function newProductHandler() {
+		if (!newProduct) {
+			setNewProduct(true);
+		} else {
+			await getProductsHandler(token);
+			setNewProduct(false);
+		}
+	}
 
 	function registerHandler() {
 		setIsAuth('registering');
@@ -29,7 +42,7 @@ export function RootLayout() {
 		setIsAuth('auth');
 	};
 
-	const categoriesHandler = async () => {
+	const categoriesHandler = async (token) => {
 		const dataFetch = await fetch('https://matt-menu.onrender.com/category', {
 			method: 'GET',
 			headers: {
@@ -44,10 +57,11 @@ export function RootLayout() {
 		}
 
 		const categoryData = await dataFetch.json();
-		setCategoryList(categoryData.categories)
+		setCategoryList(categoryData.categories);
 	};
 
 	const checkProductHandler = async (productId) => {
+		setIsFetching(true);
 		const productData = await fetch(
 			'https://matt-menu.onrender.com/product' + productId,
 			{
@@ -67,15 +81,19 @@ export function RootLayout() {
 		const product = await productData.json();
 		const newProduct = product.product;
 		setOneProduct(newProduct);
+		setIsFetching(false);
 		return newProduct;
 	};
 
-	const allProductsHandler = () => {
+	const allProductsHandler = async () => {
+		setIsFetching(true);
+		await getProductsHandler(token);
 		setOneProduct(false);
+		setIsFetching(false);
 	};
 
-	const getProductsHandler = async () => {
-		if (token === 'Bearer ') {
+	const getProductsHandler = async (authToken) => {
+		if (authToken === 'Bearer ') {
 			returnHandler();
 			return null;
 		}
@@ -84,13 +102,13 @@ export function RootLayout() {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
-				Authorization: token,
+				Authorization: authToken,
 			},
 		});
 
 		if (!result) {
 			alert('Authentication Problem, please login again!');
-			token = 'Bearer ';
+			setToken('Bearer ');
 			returnHandler();
 			return null;
 		}
@@ -99,6 +117,7 @@ export function RootLayout() {
 	};
 
 	async function loginHandler(user) {
+		setIsFetching(true);
 		const resData = await fetch('https://matt-menu.onrender.com/auth/login', {
 			method: 'POST',
 			body: JSON.stringify(user),
@@ -115,14 +134,22 @@ export function RootLayout() {
 			returnHandler();
 			return;
 		}
-		setToken('Bearer ' + data.token);
+		const receivedToken = 'Bearer ' + data.token;
+		setToken(receivedToken);
+
 		productsHandler();
-		navigate('/');
+		await getProductsHandler(receivedToken);
+		await categoriesHandler(receivedToken);
+		setIsFetching(false);
 	}
 
 	return (
 		<>
-			<MainHeader />
+			<MainHeader
+				newProductHandler={newProductHandler}
+				isAuth={isAuth}
+			/>
+			{isFetching && <Loading />}
 			{!isAuth && (
 				<Login
 					loginHandler={loginHandler}
@@ -134,20 +161,26 @@ export function RootLayout() {
 
 			{isAuth === 'auth' && oneProduct === false && (
 				<ItemList
-					getProductsHandler={getProductsHandler}
 					getOneProduct={checkProductHandler}
 					products={productsList}
-					categoriesHandler={categoriesHandler}
 				/>
 			)}
 
 			{isAuth === 'auth' && oneProduct !== false && (
 				<OneItem
 					product={oneProduct}
-					setOneProduct = {setOneProduct}
+					setOneProduct={setOneProduct}
 					allProductsHandler={allProductsHandler}
 					token={token}
 					categoryList={categoryList}
+				/>
+			)}
+
+			{newProduct && (
+				<NewProduct
+					newProductHandler={newProductHandler}
+					categoryList={categoryList}
+					token={token}
 				/>
 			)}
 		</>
