@@ -1,3 +1,5 @@
+# This project is deprecated. A new front-end was created. Check: https://github.com/MatheusMartini13/restaurantMenu_newFrontEnd_React
+
 # Matt Menu
 
 Live at: https://menu-matt.onrender.com/
